@@ -5,8 +5,6 @@ import org.apache.cloudstack.acl.RoleType;
 import org.apache.cloudstack.api.*;
 import org.apache.cloudstack.api.response.SuccessResponse;
 import org.apache.cloudstack.api.response.coffeeResponse;
-import org.apache.cloudstack.context.CallContext;
-import org.apache.cloudstack.feature.Coffee;
 import org.apache.log4j.Logger;
 
 @APICommand(name = "removeCoffee",

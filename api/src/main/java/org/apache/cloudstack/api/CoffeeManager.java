@@ -15,20 +15,20 @@ public interface CoffeeManager {
     }
 
     static Coffee updateCoffee(updateCoffeeCmd updateCoffeeCmd) {
-        Coffee coffee =
+        Coffee coffee = new Coffee();
 
         return coffee;
     }
 
     static boolean removeCoffee(removeCoffeeCmd removeCoffeeCmd) {
         Coffee coffee = new Coffee();
-        coffee.name = null;
+        coffee.id = null;
         return true;
     }
 
     static Coffee createCoffee(createCoffeeCmd id) {
         Coffee coffee = new Coffee();
-        coffee.setId(id);
+
         return coffee;
     }
 }

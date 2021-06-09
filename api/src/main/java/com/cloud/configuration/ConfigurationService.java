@@ -329,7 +329,4 @@ public interface ConfigurationService {
 
     List<? extends PortableIp> listPortableIps(long id);
 
-    Coffee updateCoffee();
-
-    Coffee editCoffee(removeCoffeeCmd removeCoffeeCmd);
 }
