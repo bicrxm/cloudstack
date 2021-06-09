@@ -10,25 +10,28 @@ import java.util.Collections;
 import java.util.List;
 
 public interface CoffeeManager {
+
+    List<Coffee> Coffees = null;
+
     static List<Coffee> listCoffees(listCoffeeCmd listCoffeeCmd) {
-        return Collections.emptyList();
+        return Coffees;
     }
 
     static Coffee updateCoffee(updateCoffeeCmd updateCoffeeCmd) {
-        Coffee coffee = new Coffee();
 
-        return coffee;
     }
 
     static boolean removeCoffee(removeCoffeeCmd removeCoffeeCmd) {
         Coffee coffee = new Coffee();
-        coffee.id = null;
+        coffee.setId(removeCoffeeCmd.getId());
+        Coffees.remove(coffee);
         return true;
     }
 
-    static Coffee createCoffee(createCoffeeCmd id) {
+    static boolean createCoffee(createCoffeeCmd createCoffeeCmd) {
         Coffee coffee = new Coffee();
-
-        return coffee;
+        coffee.setId(removeCoffeeCmd.getId());
+        Coffees.add(coffee);
+        return true;
     }
 }

@@ -37,9 +37,9 @@ public class createCoffeeCmd extends BaseAsyncCreateCmd {
 
     @Override
     public void execute() {
-        Coffee result = CoffeeManager.createCoffee(this);
+        boolean result = CoffeeManager.createCoffee(this);
 
-        if (result != null) {
+        if (result != false) {
             coffeeResponse response = new coffeeResponse();
             response.setResponseName(getCommandName());
             setResponseObject(response);
