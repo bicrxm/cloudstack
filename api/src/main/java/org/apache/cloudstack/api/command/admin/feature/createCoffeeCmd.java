@@ -1,25 +1,18 @@
 package org.apache.cloudstack.api.command.admin.feature;
 
+import com.cloud.exception.ResourceAllocationException;
 import com.cloud.user.Account;
-import org.apache.cloudstack.api.APICommand;
-import org.apache.cloudstack.api.ApiConstants;
-import org.apache.cloudstack.api.BaseCmd;
-import org.apache.cloudstack.api.Parameter;
+import org.apache.cloudstack.api.*;
 import org.apache.cloudstack.api.response.coffeeResponse;
-import org.apache.cloudstack.context.CallContext;
+import org.apache.cloudstack.feature.Coffee;
 import org.apache.log4j.Logger;
 
 @APICommand(name = "createCoffee", description = "Creates a Coffee.", responseObject = coffeeResponse.class,
         requestHasSensitiveInfo = false, responseHasSensitiveInfo = false)
-public class createCoffeeCmd extends BaseCmd {
+public class createCoffeeCmd extends BaseAsyncCreateCmd {
     public static final Logger s_logger = Logger.getLogger(createCoffeeCmd.class.getName());
 
     private static final String s_name = "createcoffeeresponse";
-
-    /////////////////////////////////////////////////////
-    //////////////// API parameters /////////////////////
-    /////////////////////////////////////////////////////
-
 
     @Parameter(name = ApiConstants.ID,
             type = CommandType.UUID,
@@ -28,18 +21,9 @@ public class createCoffeeCmd extends BaseCmd {
             description = "ID of my coffee")
     private Long id;
 
-    /////////////////////////////////////////////////////
-    /////////////////// Accessors ///////////////////////
-    /////////////////////////////////////////////////////
-
-
     public Long getId() {
         return id;
     }
-
-    /////////////////////////////////////////////////////
-    /////////////// API Implementation///////////////////
-    /////////////////////////////////////////////////////
 
     @Override
     public String getCommandName() {
@@ -53,12 +37,29 @@ public class createCoffeeCmd extends BaseCmd {
 
     @Override
     public void execute() {
-        CallContext.current().setEventDetails("Id: " + getId());
+        Coffee result = CoffeeManager.createCoffee(this);
 
-        final coffeeResponse response = new coffeeResponse();
-        response.setResponseName(getCommandName());
-        response.setObjectName("coffee-object-name");
-        setResponseObject(response);
+        if (result != null) {
+            coffeeResponse response = new coffeeResponse();
+            response.setResponseName(getCommandName());
+            setResponseObject(response);
+        } else {
+            throw new ServerApiException(ApiErrorCode.INTERNAL_ERROR, "Failed to create Coffee");
         }
+    }
+
+    @Override
+    public String getEventType() {
+        return null;
+    }
+
+    @Override
+    public String getEventDescription() {
+        return null;
+    }
+
+    @Override
+    public void create() throws ResourceAllocationException {
+
     }
 }

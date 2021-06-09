@@ -40,22 +40,22 @@ public abstract class BaseResponse implements ResponseObject {
     }
 
     @Override
-    public final String getResponseName() {
+    public String getResponseName() {
         return responseName;
     }
 
     @Override
-    public final void setResponseName(String responseName) {
+    public void setResponseName(String responseName) {
         this.responseName = responseName;
     }
 
     @Override
-    public final String getObjectName() {
+    public String getObjectName() {
         return objectName;
     }
 
     @Override
-    public final void setObjectName(String objectName) {
+    public void setObjectName(String objectName) {
         this.objectName = objectName;
     }
 

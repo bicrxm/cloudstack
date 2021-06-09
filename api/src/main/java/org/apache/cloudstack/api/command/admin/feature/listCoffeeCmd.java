@@ -3,6 +3,7 @@ package org.apache.cloudstack.api.command.admin.feature;
 import org.apache.cloudstack.api.*;
 import org.apache.cloudstack.api.response.ListResponse;
 import org.apache.cloudstack.api.response.coffeeResponse;
+import org.apache.cloudstack.feature.Coffee;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -15,9 +16,6 @@ public class listCoffeeCmd extends BaseListCmd {
 
     private static final String s_name = "listcoffeeresponse";
 
-    /////////////////////////////////////////////////////
-    //////////////// API parameters /////////////////////
-    /////////////////////////////////////////////////////
 
     @Parameter(name = ApiConstants.ID,
             type = BaseCmd.CommandType.UUID,
@@ -26,18 +24,10 @@ public class listCoffeeCmd extends BaseListCmd {
             description = "ID of my coffee")
     private Long id;
 
-    /////////////////////////////////////////////////////
-    /////////////////// Accessors ///////////////////////
-    /////////////////////////////////////////////////////
 
     public Long getId() {
         return id;
     }
-
-    /////////////////////////////////////////////////////
-    /////////////// API Implementation///////////////////
-    /////////////////////////////////////////////////////
-
 
 
     @Override
@@ -47,7 +37,7 @@ public class listCoffeeCmd extends BaseListCmd {
 
     @Override
     public void execute() {
-        final List<Coffee> coffees = coffeeManager.listCoffees(this);
+        final List<Coffee> coffees = CoffeeManager.listCoffees(this);
 
         final List<coffeeResponse> responseList = new ArrayList<>();
         for (final Coffee coffee : coffees) {
