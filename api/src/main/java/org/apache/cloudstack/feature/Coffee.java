@@ -1,9 +1,5 @@
 package org.apache.cloudstack.feature;
 
-import org.apache.cloudstack.api.Identity;
-import org.apache.cloudstack.api.InternalIdentity;
-import org.apache.cloudstack.api.command.admin.feature.CreateCoffeeCmd;
-
 public class Coffee {
     public String UUID;
     public Long id;
