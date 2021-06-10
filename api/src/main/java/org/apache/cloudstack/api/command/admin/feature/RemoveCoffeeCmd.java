@@ -4,28 +4,29 @@ import com.cloud.user.Account;
 import org.apache.cloudstack.acl.RoleType;
 import org.apache.cloudstack.api.*;
 import org.apache.cloudstack.api.response.SuccessResponse;
-import org.apache.cloudstack.api.response.coffeeResponse;
+import org.apache.cloudstack.api.response.CoffeeResponse;
 import org.apache.log4j.Logger;
 
 @APICommand(name = "removeCoffee",
         description = "Deletes a Coffee",
-        responseObject = coffeeResponse.class,
+        responseObject = CoffeeResponse.class,
         requestHasSensitiveInfo = false,
         responseHasSensitiveInfo = false,
         authorized = {RoleType.Admin, RoleType.ResourceAdmin, RoleType.DomainAdmin, RoleType.User})
-public class removeCoffeeCmd extends BaseAsyncCmd {
-    public static final Logger s_logger = Logger.getLogger(removeCoffeeCmd.class.getName());
+public class RemoveCoffeeCmd extends BaseAsyncCmd {
+    public static final Logger s_logger = Logger.getLogger(RemoveCoffeeCmd.class.getName());
 
     private static final String s_name = "removecoffeeresponse";
+    private static Long id;
 
     @Parameter(name = ApiConstants.ID,
             type = CommandType.UUID,
             required = false,
-            entityType = coffeeResponse.class,
+            entityType = CoffeeResponse.class,
             description = "ID of my coffee")
-    private Long id;
+    private Long Id;
 
-    public Long getId() {
+    public static Long getId() {
         return id;
     }
 
@@ -42,7 +43,7 @@ public class removeCoffeeCmd extends BaseAsyncCmd {
 
     @Override
     public void execute() {
-        boolean result = CoffeeManager.removeCoffee(this);
+        boolean result = CoffeeManager.RemoveCoffee(this);
         if (result) {
             SuccessResponse response = new SuccessResponse(getCommandName());
             this.setResponseObject(response);

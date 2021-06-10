@@ -19,7 +19,7 @@ package com.cloud.configuration;
 import java.util.List;
 
 import org.apache.cloudstack.api.command.admin.config.UpdateCfgCmd;
-import org.apache.cloudstack.api.command.admin.feature.removeCoffeeCmd;
+import org.apache.cloudstack.api.command.admin.feature.RemoveCoffeeCmd;
 import org.apache.cloudstack.api.command.admin.network.CreateManagementNetworkIpRangeCmd;
 import org.apache.cloudstack.api.command.admin.network.CreateNetworkOfferingCmd;
 import org.apache.cloudstack.api.command.admin.network.DeleteManagementNetworkIpRangeCmd;

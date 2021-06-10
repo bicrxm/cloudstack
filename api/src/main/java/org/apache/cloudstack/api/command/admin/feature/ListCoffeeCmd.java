@@ -2,17 +2,17 @@ package org.apache.cloudstack.api.command.admin.feature;
 
 import org.apache.cloudstack.api.*;
 import org.apache.cloudstack.api.response.ListResponse;
-import org.apache.cloudstack.api.response.coffeeResponse;
+import org.apache.cloudstack.api.response.CoffeeResponse;
 import org.apache.cloudstack.feature.Coffee;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@APICommand(name = "listCoffee", description = "Lists coffee", responseObject = coffeeResponse.class,
+@APICommand(name = "listCoffee", description = "Lists coffee", responseObject = CoffeeResponse.class,
         requestHasSensitiveInfo = false, responseHasSensitiveInfo = true)
-public class listCoffeeCmd extends BaseListCmd {
-    public static final Logger s_logger = Logger.getLogger(listCoffeeCmd.class.getName());
+public class ListCoffeeCmd extends BaseListCmd {
+    public static final Logger s_logger = Logger.getLogger(ListCoffeeCmd.class.getName());
 
     private static final String s_name = "listcoffeeresponse";
 
@@ -20,7 +20,7 @@ public class listCoffeeCmd extends BaseListCmd {
     @Parameter(name = ApiConstants.ID,
             type = BaseCmd.CommandType.UUID,
             required = false,
-            entityType = coffeeResponse.class,
+            entityType = CoffeeResponse.class,
             description = "ID of my coffee")
     private Long id;
 
@@ -37,14 +37,14 @@ public class listCoffeeCmd extends BaseListCmd {
 
     @Override
     public void execute() {
-        final List<Coffee> coffees = CoffeeManager.listCoffees(this);
+        final List<Coffee> coffees = CoffeeManager.ListCoffees(this);
 
-        final List<coffeeResponse> responseList = new ArrayList<>();
+        final List<CoffeeResponse> responseList = new ArrayList<>();
         for (final Coffee coffee : coffees) {
-            coffeeResponse response = new coffeeResponse();
+            CoffeeResponse response = new CoffeeResponse();
             response.setId(coffee.getUuid());
         }
-        final ListResponse<coffeeResponse> coffeeResponses = new ListResponse<>();
+        final ListResponse<CoffeeResponse> coffeeResponses = new ListResponse<>();
         coffeeResponses.setObjectName("coffee");
         coffeeResponses.setResponses(responseList);
         coffeeResponses.setResponseName(getCommandName());

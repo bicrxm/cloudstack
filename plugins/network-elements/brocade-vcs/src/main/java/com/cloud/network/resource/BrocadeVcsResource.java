@@ -16,31 +16,8 @@
 // under the License.
 package com.cloud.network.resource;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.naming.ConfigurationException;
-
-import org.apache.log4j.Logger;
-
 import com.cloud.agent.IAgentControl;
-import com.cloud.agent.api.Answer;
-import com.cloud.agent.api.AssociateMacToNetworkAnswer;
-import com.cloud.agent.api.AssociateMacToNetworkCommand;
-import com.cloud.agent.api.Command;
-import com.cloud.agent.api.CreateNetworkAnswer;
-import com.cloud.agent.api.CreateNetworkCommand;
-import com.cloud.agent.api.DeleteNetworkAnswer;
-import com.cloud.agent.api.DeleteNetworkCommand;
-import com.cloud.agent.api.DisassociateMacFromNetworkAnswer;
-import com.cloud.agent.api.DisassociateMacFromNetworkCommand;
-import com.cloud.agent.api.MaintainAnswer;
-import com.cloud.agent.api.MaintainCommand;
-import com.cloud.agent.api.PingCommand;
-import com.cloud.agent.api.ReadyAnswer;
-import com.cloud.agent.api.ReadyCommand;
-import com.cloud.agent.api.StartupBrocadeVcsCommand;
-import com.cloud.agent.api.StartupCommand;
+import com.cloud.agent.api.*;
 import com.cloud.host.Host;
 import com.cloud.host.Host.Type;
 import com.cloud.network.brocade.BrocadeVcsApi;
@@ -48,6 +25,11 @@ import com.cloud.network.brocade.BrocadeVcsApiException;
 import com.cloud.network.schema.showvcs.Output;
 import com.cloud.network.schema.showvcs.VcsNodeInfo;
 import com.cloud.resource.ServerResource;
+import org.apache.log4j.Logger;
+
+import javax.naming.ConfigurationException;
+import java.util.List;
+import java.util.Map;
 
 public class BrocadeVcsResource implements ServerResource {
     private static final Logger s_logger = Logger.getLogger(BrocadeVcsResource.class);

@@ -9,7 +9,7 @@ import org.apache.cloudstack.api.ResponseObject;
 import org.apache.cloudstack.feature.Coffee;
 
 @EntityReference(value = Coffee.class)
-public class coffeeResponse extends BaseResponse implements ResponseObject {
+public class CoffeeResponse extends BaseResponse implements ResponseObject {
     @SerializedName(ApiConstants.ID)
     @Param(description = "the ID of my resource")
     private String id;

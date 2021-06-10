@@ -1,25 +1,22 @@
 package org.apache.cloudstack.api.command.admin.feature;
 
-
+import com.cloud.exception.ResourceAllocationException;
 import com.cloud.user.Account;
 import org.apache.cloudstack.api.*;
-import org.apache.cloudstack.api.response.coffeeResponse;
-import org.apache.cloudstack.feature.Coffee;
+import org.apache.cloudstack.api.response.CoffeeResponse;
 import org.apache.log4j.Logger;
 
-import javax.inject.Inject;
-
-@APICommand(name = "updateCoffee", description = "Updates coffee", responseObject = coffeeResponse.class,
+@APICommand(name = "createCoffee", description = "Creates a Coffee.", responseObject = CoffeeResponse.class,
         requestHasSensitiveInfo = false, responseHasSensitiveInfo = false)
-public class updateCoffeeCmd extends BaseAsyncCmd {
-    public static final Logger s_logger = Logger.getLogger(updateCoffeeCmd.class.getName());
+public class CreateCoffeeCmd extends BaseAsyncCreateCmd {
+    public static final Logger s_logger = Logger.getLogger(CreateCoffeeCmd.class.getName());
 
-    private static final String s_name = "updatecoffeeresponse";
+    private static final String s_name = "createcoffeeresponse";
 
     @Parameter(name = ApiConstants.ID,
-            type = BaseCmd.CommandType.UUID,
+            type = CommandType.UUID,
             required = false,
-            entityType = coffeeResponse.class,
+            entityType = CoffeeResponse.class,
             description = "ID of my coffee")
     private Long id;
 
@@ -39,14 +36,14 @@ public class updateCoffeeCmd extends BaseAsyncCmd {
 
     @Override
     public void execute() {
-        Coffee result = CoffeeManager.updateCoffee(this);
+        boolean result = CoffeeManager.createCoffee(this);
 
-        if (result != null) {
-            coffeeResponse response = new coffeeResponse();
+        if (result != false) {
+            CoffeeResponse response = new CoffeeResponse();
             response.setResponseName(getCommandName());
             setResponseObject(response);
         } else {
-            throw new ServerApiException(ApiErrorCode.INTERNAL_ERROR, "Failed to update Coffee");
+            throw new ServerApiException(ApiErrorCode.INTERNAL_ERROR, "Failed to create Coffee");
         }
     }
 
@@ -58,5 +55,10 @@ public class updateCoffeeCmd extends BaseAsyncCmd {
     @Override
     public String getEventDescription() {
         return null;
+    }
+
+    @Override
+    public void create() throws ResourceAllocationException {
+
     }
 }
