@@ -5,8 +5,6 @@ import org.apache.cloudstack.api.command.admin.feature.ListCoffeeCmd;
 import org.apache.cloudstack.api.command.admin.feature.RemoveCoffeeCmd;
 import org.apache.cloudstack.api.command.admin.feature.UpdateCoffeeCmd;
 import org.apache.cloudstack.feature.Coffee;
-
-import java.util.Collections;
 import java.util.List;
 
 public interface CoffeeManager {
@@ -35,4 +33,5 @@ public interface CoffeeManager {
         Coffees.add(coffee);
         return true;
     }
+    public List<Class<?>> getCommands();
 }

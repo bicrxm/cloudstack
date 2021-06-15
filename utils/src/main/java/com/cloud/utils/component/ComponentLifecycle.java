@@ -19,6 +19,7 @@
 
 package com.cloud.utils.component;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.naming.ConfigurationException;
@@ -61,4 +62,5 @@ public interface ComponentLifecycle extends Named {
      * @return true background tasks were stopped, false otherwise.
      */
     public boolean stop();
+
 }

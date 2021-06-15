@@ -42,6 +42,8 @@ import com.cloud.user.Account;
 import com.cloud.uservm.UserVm;
 import com.cloud.vm.VirtualMachine;
 
+import java.util.List;
+
 @APICommand(name = "resetSSHKeyForVirtualMachine", responseObject = UserVmResponse.class, description = "Resets the SSH Key for virtual machine. " +
         "The virtual machine must be in a \"Stopped\" state. [async]", responseView = ResponseView.Restricted, entityType = {VirtualMachine.class},
     requestHasSensitiveInfo = false, responseHasSensitiveInfo = true)
@@ -59,7 +61,7 @@ public class ResetVMSSHKeyCmd extends BaseAsyncCmd implements UserCmd {
     private Long id;
 
     @Parameter(name = ApiConstants.SSH_KEYPAIR, type = CommandType.STRING, required = true, description = "name of the ssh key pair used to login to the virtual machine")
-    private String name;
+    List<String> names;
 
     //Owner information
     @Parameter(name = ApiConstants.ACCOUNT, type = CommandType.STRING, description = "an optional account for the ssh key. Must be used with domainId.")
@@ -78,8 +80,8 @@ public class ResetVMSSHKeyCmd extends BaseAsyncCmd implements UserCmd {
     /////////////////// Accessors ///////////////////////
     /////////////////////////////////////////////////////
 
-    public String getName() {
-        return name;
+    public List<String> getName() {
+        return names;
     }
 
     public Long getId() {

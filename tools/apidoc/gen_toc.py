@@ -190,6 +190,7 @@ known_categories = {
     'cloudian': 'Cloudian',
     'Sioc' : 'Sioc',
     'Diagnostics': 'Diagnostics',
+    'Coffee': 'Coffee',
     'Management': 'Management',
     'Backup' : 'Backup and Recovery',
     'Restore' : 'Backup and Recovery',

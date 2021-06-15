@@ -2,9 +2,16 @@ package org.apache.cloudstack.api.command.admin.feature;
 
 import com.cloud.exception.ResourceAllocationException;
 import com.cloud.user.Account;
-import org.apache.cloudstack.api.*;
+
+import org.apache.cloudstack.api.APICommand;
+import org.apache.cloudstack.api.ApiConstants;
+import org.apache.cloudstack.api.ApiErrorCode;
+import org.apache.cloudstack.api.CoffeeManager;
+import org.apache.cloudstack.api.BaseAsyncCreateCmd;
 import org.apache.cloudstack.api.response.CoffeeResponse;
+import org.apache.cloudstack.api.ServerApiException;
 import org.apache.log4j.Logger;
+import org.apache.cloudstack.api.Parameter;
 
 @APICommand(name = "createCoffee", description = "Creates a Coffee.", responseObject = CoffeeResponse.class,
         requestHasSensitiveInfo = false, responseHasSensitiveInfo = false)

@@ -1,10 +1,16 @@
 package org.apache.cloudstack.api.command.admin.feature;
 
+import org.apache.cloudstack.api.ApiConstants;
 import com.cloud.user.Account;
 import org.apache.cloudstack.acl.RoleType;
-import org.apache.cloudstack.api.*;
+import org.apache.cloudstack.api.ServerApiException;
+import org.apache.cloudstack.api.APICommand;
+import org.apache.cloudstack.api.BaseAsyncCmd;
+import org.apache.cloudstack.api.Parameter;
 import org.apache.cloudstack.api.response.SuccessResponse;
 import org.apache.cloudstack.api.response.CoffeeResponse;
+import org.apache.cloudstack.api.CoffeeManager;
+import org.apache.cloudstack.api.ApiErrorCode;
 import org.apache.log4j.Logger;
 
 @APICommand(name = "removeCoffee",

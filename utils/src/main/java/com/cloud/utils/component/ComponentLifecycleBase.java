@@ -20,6 +20,7 @@
 package com.cloud.utils.component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.naming.ConfigurationException;
@@ -84,4 +85,5 @@ public class ComponentLifecycleBase implements ComponentLifecycle {
     public boolean stop() {
         return true;
     }
+
 }
