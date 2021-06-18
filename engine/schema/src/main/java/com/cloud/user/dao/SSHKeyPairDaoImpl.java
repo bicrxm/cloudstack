@@ -16,6 +16,7 @@
 // under the License.
 package com.cloud.user.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -64,12 +65,13 @@ public class SSHKeyPairDaoImpl extends GenericDaoBase<SSHKeyPairVO, Long> implem
     }
 
     @Override
-    public SSHKeyPairVO findByName(long accountId, long domainId, List<String> name) {
-        SearchCriteria<SSHKeyPairVO> sc = createSearchCriteria();
-        sc.addAnd("accountId", SearchCriteria.Op.EQ, accountId);
-        sc.addAnd("domainId", SearchCriteria.Op.EQ, domainId);
-        sc.addAnd("name", SearchCriteria.Op.EQ, name);
-        return findOneBy(sc);
+    public ArrayList<SSHKeyPairVO> findByNames(long accountId, long domainId, List<String> names) {
+        ArrayList<SSHKeyPairVO> sc = new ArrayList<SSHKeyPairVO>();
+        for(String name : names){
+            SSHKeyPairVO s = findByName(accountId, domainId, name);
+            sc.add(s);
+        }
+        return sc;
     }
 
     @Override
