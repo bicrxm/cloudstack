@@ -855,13 +855,26 @@ public class UserVmManagerImpl extends ManagerBase implements UserVmManager, Vir
             throw new InvalidParameterValueException("Vm " + userVm + " should be stopped to do SSH Key reset");
         }
 
-        SSHKeyPairVO s = _sshKeyPairDao.findByName(owner.getAccountId(), owner.getDomainId(), cmd.getName());
+        if (cmd.getName() != null && cmd.getNames() != null ) {
+            s_logger.error("vm is not in the right state: " + vmId);
+            throw new InvalidParameterValueException("Vm " + userVm + " should have either single SSH key or multiple SSH keys, not both");
+        }
 
-        ArrayList<SSHKeyPairVO> s = _sshKeyPairDao.findByNames(owner.getAccountId(), owner.getDomainId(), cmd.getNames());
+        SSHKeyPairVO s = new SSHKeyPairVO();
+        if (cmd.getName() != null) {
+            s = _sshKeyPairDao.findByName(owner.getAccountId(), owner.getDomainId(), cmd.getName());
+            if (s == null) {
+                throw new InvalidParameterValueException("A key pair with name '" + cmd.getName() + "' does not exist for account " + owner.getAccountName()
+                        + " in specified domain id");
+            }
+        }
 
-        if (s == null) {
-            throw new InvalidParameterValueException("A key pair with name '" + cmd.getName() + "' does not exist for account " + owner.getAccountName()
-            + " in specified domain id");
+        if (cmd.getNames() != null) {
+            s = _sshKeyPairDao.findByName(owner.getAccountId(), owner.getDomainId(), cmd.getName());
+            if (s == null) {
+                throw new InvalidParameterValueException("Any key pair with name among the given names does not exist for account " + owner.getAccountName()
+                        + " in specified domain id");
+            }
         }
 
         _accountMgr.checkAccess(caller, null, true, userVm);

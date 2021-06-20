@@ -841,6 +841,7 @@ public class ApiConstants {
     public static final String DYNAMIC_SCALING_ENABLED = "dynamicscalingenabled";
 
     public static final String POOL_TYPE ="pooltype";
+    public static final String SSH_KEYPAIRS = "keypairs";
 
     public enum BootType {
         UEFI, BIOS;

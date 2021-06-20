@@ -16,7 +16,6 @@
 // under the License.
 package com.cloud.user.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.cloud.user.SSHKeyPairVO;
@@ -32,7 +31,7 @@ public interface SSHKeyPairDao extends GenericDao<SSHKeyPairVO, Long> {
 
     public SSHKeyPairVO findByName(long accountId, long domainId, String name);
 
-    public ArrayList<SSHKeyPairVO> findByNames(long accountId, long domainId, List<String> names);
+    public SSHKeyPairVO findByNames(long accountId, long domainId, List<String> names);
 
     public SSHKeyPairVO findByPublicKey(String publicKey);
 
