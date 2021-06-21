@@ -65,15 +65,13 @@ public class SSHKeyPairDaoImpl extends GenericDaoBase<SSHKeyPairVO, Long> implem
     }
 
     @Override
-    public SSHKeyPairVO findByNames(long accountId, long domainId, List<String> names) {
+    public List<SSHKeyPairVO> findByNames(long accountId, long domainId, List<String> names) {
         SearchCriteria<SSHKeyPairVO> sc = createSearchCriteria();
         final Filter s_f = new Filter(SSHKeyPairVO.class,"name",false, null, null);
         sc.addAnd("accountId", SearchCriteria.Op.EQ, accountId);
         sc.addAnd("domainId", SearchCriteria.Op.EQ, domainId);
         sc.addAnd("name", SearchCriteria.Op.EQ, names);
-        List<SSHKeyPairVO> s_list = search(sc, s_f);
-        if (s_list.size()==0) return null;
-        else return s_list.get(0);
+        return search(sc, s_f);
     }
 
     @Override
