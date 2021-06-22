@@ -868,6 +868,10 @@ public class UserVmManagerImpl extends ManagerBase implements UserVmManager, Vir
                         + " in specified domain id");
             }
             sshPublicKey = s.getPublicKey();
+            if(sshPublicKey == null) {
+                s_logger.error("SSH public key not found for single ssh");
+            }
+            else s_logger.info("SSH public key is ready for single ssh");
         }
 
         if (cmd.getNames() != null) {
@@ -879,6 +883,10 @@ public class UserVmManagerImpl extends ManagerBase implements UserVmManager, Vir
             for (SSHKeyPairVO s : s_list){
                 sshPublicKey = sshPublicKey.concat(s.getPublicKey());
             }
+            if(sshPublicKey == null) {
+                s_logger.error("SSH public key not found for multiple ssh");
+            }
+            else s_logger.info("SSH public key is ready for multiple ssh");
         }
 
         _accountMgr.checkAccess(caller, null, true, userVm);
