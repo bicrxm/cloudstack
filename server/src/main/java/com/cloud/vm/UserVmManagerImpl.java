@@ -869,26 +869,24 @@ public class UserVmManagerImpl extends ManagerBase implements UserVmManager, Vir
 
         _accountMgr.checkAccess(caller, null, true, userVm);
 
+        String sshPublicKey = null;
+
         if (s != null) {
-            String sshPublicKey = s.getPublicKey();
-
-            boolean result = resetVMSSHKeyInternal(vmId, sshPublicKey);
-
-            if (!result) {
-                throw new CloudRuntimeException("Failed to reset SSH Key for the virtual machine ");
-            }
+            sshPublicKey = s.getPublicKey();
         }
 
         if (s_list != null) {
             for (SSHKeyPairVO s_each : s_list) {
-                String sshPublicKey = s_each.getPublicKey();
-
-                boolean result = resetVMSSHKeyInternal(vmId, sshPublicKey);
-
-                if (!result) {
-                    throw new CloudRuntimeException("Failed to reset SSH Key for the virtual machine ");
-                }
+                String publicKey = s_each.getPublicKey();
+                if (sshPublicKey != null) sshPublicKey.concat("/n");
+                sshPublicKey.concat(publicKey);
             }
+        }
+
+        boolean result = resetVMSSHKeyInternal(vmId, sshPublicKey);
+
+        if (!result) {
+            throw new CloudRuntimeException("Failed to reset SSH Key for the virtual machine ");
         }
 
         removeEncryptedPasswordFromUserVmVoDetails(userVm);
