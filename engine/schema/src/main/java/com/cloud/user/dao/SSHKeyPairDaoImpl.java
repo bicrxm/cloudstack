@@ -70,7 +70,7 @@ public class SSHKeyPairDaoImpl extends GenericDaoBase<SSHKeyPairVO, Long> implem
         final Filter s_f = new Filter(SSHKeyPairVO.class,"name",false, null, null);
         sc.addAnd("accountId", SearchCriteria.Op.EQ, accountId);
         sc.addAnd("domainId", SearchCriteria.Op.EQ, domainId);
-        sc.addAnd("name", SearchCriteria.Op.EQ, names);
+        sc.addAnd("name", SearchCriteria.Op.IN, names);
         return search(sc, s_f);
     }
 
