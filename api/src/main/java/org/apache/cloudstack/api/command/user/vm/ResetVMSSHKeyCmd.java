@@ -64,8 +64,8 @@ public class ResetVMSSHKeyCmd extends BaseAsyncCmd implements UserCmd {
     @Parameter(name = ApiConstants.SSH_KEYPAIR, type = CommandType.STRING, description = "name of the ssh key pair used to login to the virtual machine")
     private String name;
 
-    @Parameter(name = ApiConstants.SSH_KEYPAIRS, type = CommandType.LIST, description = "name of the multiple ssh key pairs used to login to the virtual machine")
-    List<String> names = new ArrayList<String>();
+    @Parameter(name = ApiConstants.SSH_KEYPAIRS, type = CommandType.LIST, collectionType = CommandType.STRING ,description = "name of the multiple ssh key pairs used to login to the virtual machine")
+    List<String> names;
 
     //Owner information
     @Parameter(name = ApiConstants.ACCOUNT, type = CommandType.STRING, description = "an optional account for the ssh key. Must be used with domainId.")

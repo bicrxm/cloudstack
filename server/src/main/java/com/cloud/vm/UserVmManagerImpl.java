@@ -855,22 +855,22 @@ public class UserVmManagerImpl extends ManagerBase implements UserVmManager, Vir
             throw new InvalidParameterValueException("Vm " + userVm + " should be stopped to do SSH Key reset");
         }
 
+        if (cmd.getName() == null && cmd.getNames() == null) {
+            throw new InvalidParameterValueException("No keypair name given");
+        }
+
         SSHKeyPairVO s = null;
         if (cmd.getName() != null) {
             s = _sshKeyPairDao.findByName(owner.getAccountId(), owner.getDomainId(), cmd.getName());
         }
-        //if (s == null) {
-        //    throw new InvalidParameterValueException("A key pair with name '" + cmd.getName() + "' does not exist for account " + owner.getAccountName()
-        //            + " in specified domain id");
-        //}
 
         List<SSHKeyPairVO> s_list = null;
-        if (cmd.getName() != null) {
+        if (cmd.getNames() != null) {
             s_list = _sshKeyPairDao.findByNames(owner.getAccountId(), owner.getDomainId(), cmd.getNames());
         }
 
-        if (s_list == null) {
-            throw new InvalidParameterValueException("Any key pair does not exist for account " + owner.getAccountName()
+        if (s_list == null && s == null) {
+            throw new InvalidParameterValueException("Any key pair with the given names does not exist for account " + owner.getAccountName()
                     + " in specified domain id");
         }
 
