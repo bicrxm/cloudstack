@@ -71,7 +71,7 @@ public class SSHKeyPairDaoImpl extends GenericDaoBase<SSHKeyPairVO, Long> implem
         sc.addAnd("accountId", SearchCriteria.Op.EQ, accountId);
         sc.addAnd("domainId", SearchCriteria.Op.EQ, domainId);
         sc.addAnd("name", SearchCriteria.Op.IN, names);
-        return search(sc, s_f);
+        return this.search(sc, s_f);
     }
 
     @Override
